@@ -1,18 +1,46 @@
-#include <iostream>
-#include "singlelinkedlist.cpp"
+//
+// Created by Ary on 4/09/2026.
+//
 
-int main()
-{
-    linked_list<int> ll;
-    for(int i = 1; i < 11; ++i)
-        ll.push_front(i);
-    std::cout << ll << std::endl;
-    ll.remove(ll.search(5));
-    std::cout << ll << std::endl;
-    ll.insert(ll.search(8), 88);
-    std::cout << ll << std::endl;
-    ll.reverse();
-    std::cout << ll << std::endl;
-    ll.remove(ll.front());
-    return 0;
-}
+
+#include <stack>
+
+
+class MyQueue {
+    std::stack<int> front;
+    std::stack<int> back;
+
+    void transfer(){
+        if(front.empty()){
+            while(!back.empty()){
+                front.push(back.top());
+                back.pop();
+            }
+        }
+    }
+
+public:
+    MyQueue() {}
+
+
+
+    void push(int x) {
+        back.push(x);
+    }
+
+    int pop() {
+        transfer();
+        int val = front.top();
+        front.pop();
+        return val;
+    }
+
+    int peek() {
+        transfer();
+        return front.top();
+    }
+
+    bool empty() {
+        return (front.empty() && back.empty());
+    }
+};
