@@ -1,0 +1,45 @@
+#include <iostream>
+#include <stack>
+
+bool valid(char abierto, char cerrado) {
+    return (abierto == '(' && cerrado == ')') ||
+            (abierto == '[' && cerrado == ']') ||
+                (abierto == '{' && cerrado == '}');
+}
+
+int main() {
+    std::cin.tie(nullptr);
+    std::ios_base::sync_with_stdio(false);
+
+    int n;
+    std::cin >> n;
+
+    while (n--) {
+        std::string s;
+        std::cin >> s;
+        std::stack<char> pila;
+        bool balanced = true;
+
+        for (const char &c :s) {
+            if (c == '(' || c == '[' || c == '{') {
+                pila.push(c);
+            }
+            else if (c == ')' || c == '}' || c == ']'){
+                if (pila.empty() || !valid(pila.top(), c)) {
+                    balanced = false;
+                    break;
+                }
+                pila.pop();
+            }
+
+        }
+
+        if (balanced && pila.empty()) {
+            std::cout << "YES" << std::endl;
+        }
+        else {
+            std::cout << "NO" << std::endl;
+        }
+    }
+
+}
