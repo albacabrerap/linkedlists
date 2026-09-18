@@ -6,4 +6,5 @@ set(CMAKE_CXX_STANDARD 20)
 add_executable(linkedlists main.cpp
         singlelinkedlist.cpp
         hash_table.cpp
-        hash_table.cpp)
+        hash_table.cpp
+        bstree.cpp)
